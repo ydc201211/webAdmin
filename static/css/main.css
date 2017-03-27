@@ -11,7 +11,7 @@ a{text-decoration: none}
 .content{
     background: none repeat scroll 0 0 #fff;
     position: absolute;
-    left: 250px;
+    left: 180px;
     right: 0;
     top: 70px;
     bottom:0;
@@ -36,6 +36,10 @@ a{text-decoration: none}
 }
 .el-table td,.el-table th{
     padding:5px 10px;
+    text-align: center;
+}
+.el-table th>.cell{
+    text-align: center;
 }
 .el-table tr:hover{
     background: #f6faff;

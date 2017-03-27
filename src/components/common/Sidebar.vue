@@ -19,7 +19,7 @@
             <el-submenu index="4">
                 <template slot="title"><i class="el-icon-star-on"></i>人员信息管理</template>
                 <el-menu-item index="inspectorInfo">巡检员信息</el-menu-item>
-                <el-menu-item index="mixcharts">个人资料</el-menu-item>
+                <el-menu-item index="mine">个人资料</el-menu-item>
             </el-submenu>
         </el-menu>
     </div>
@@ -37,7 +37,7 @@
     .sidebar{
         display: block;
         position: absolute;
-        width: 250px;
+        width: 180px;
         left: 0;
         top: 70px;
         bottom:0;

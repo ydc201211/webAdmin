@@ -12,21 +12,15 @@
             </el-table-column>
             <el-table-column prop="id" label="ID" sortable width="120">
             </el-table-column>
-            <el-table-column prop="account" label="账户" sortable width="150">
+            <el-table-column prop="account" label="账户" sortable width="180">
             </el-table-column>
-            <el-table-column prop="password" label="密码" sortable width="120">
+            <el-table-column prop="password" label="密码" sortable width="130">
             </el-table-column>
-            <el-table-column prop="realName" label="真实名字" :formatter="formatter" width="120">
+            <el-table-column prop="realName" label="真实名字" :formatter="formatter" width="150">
             </el-table-column>
-            <el-table-column prop="tag" label="标签" width="120"
-                    :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-                    :filter-method="filterTag">
-                <template scope="scope">
-                    <el-tag :type="scope.row.tag === '家' ? 'primary' : 'success'" close-transition>{{scope.row.tag}}
-                    </el-tag>
-                </template>
+            <el-table-column prop="sex" label="性别" width="80">
             </el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="235">
                 <template scope="scope">
                     <el-button size="small"
                             @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -53,31 +47,31 @@
                     account: 'ydc201211',
                     password: '123456',
                     realName: '张三',
-                    tag: '家'
+                    sex: '女'
                 }, {
                     id:"17002",
                     account: 'ydc201211',
                     password: '123456',
                     realName: '张三',
-                    tag: '公司'
+                    sex: '男'
                 }, {
                     id:"17003",
                     account: 'ydc201211',
-                    password: '123456',
+                    password: '323456',
                     realName: '张三',
-                    tag: '家'
+                    sex: '男'
                 }, {
                     id:"17004",
                     account: 'ydc201211',
-                    password: '123456',
+                    password: '223456',
                     realName: '张三',
-                    tag: '公司'
+                    sex: '男'
                 }]
             }
         },
         methods: {
             formatter(row, column) {
-                return row.address;
+                return row.realName;
             },
             filterTag(value, row) {
                 return row.tag === value;

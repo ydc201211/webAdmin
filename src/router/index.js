@@ -51,7 +51,15 @@ export default new Router({
                 },
                 {
                     path: '/inspectorInfo',
-                    component: resolve => require(['../components/page/InspectorInfo.vue'], resolve)    // vue-echarts-v3组件
+                    component: resolve => require(['../components/page/InspectorInfo.vue'], resolve)    // 巡检员信息页面
+                },
+                {
+                    path: '/mine',
+                    component: resolve => require(['../components/page/Mine.vue'], resolve) //个人资料页面
+                },
+                {
+                    path: '/addPerson',
+                    component: resolve => require(['../components/page/AddPerson.vue'], resolve) //个人资料页面
                 }
             ]
         },
