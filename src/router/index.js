@@ -57,10 +57,6 @@ export default new Router({
                     path: '/mine',
                     component: resolve => require(['../components/page/Mine.vue'], resolve) //个人资料页面
                 },
-                {
-                    path: '/addPerson',
-                    component: resolve => require(['../components/page/AddPerson.vue'], resolve) //个人资料页面
-                }
             ]
         },
         {

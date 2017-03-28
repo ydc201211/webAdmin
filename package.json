@@ -5,8 +5,8 @@
   "author": "lin-xin <2981207131@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "dev": "node build/dev-server.js"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -46,6 +46,7 @@
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.1.10",
+    "vuex": "^2.2.1",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
