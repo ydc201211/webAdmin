@@ -1,16 +1,24 @@
 <template>
     <div>
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item><i class="el-icon-date"></i>人员信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="type === 'add'">添加信息</el-breadcrumb-item>
+                <el-breadcrumb-item v-else-if="type === 'modify'">编辑信息</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+
         <img class="pre-img" :src="src" alt="">
         <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop','upload-img']"
                             :crop="true"
                             text="上传图片"
                             url="/api/posts/"
                             extensions="png,gif,jpeg,jpg"
-                            @:imageuploaded="imageuploaded"
+                            @:imageuploaded="imageUploaded"
                             @:errorhandle="handleError"></vue-core-image-upload>
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="账户">
-                <el-input v-model="form.account" class="acconut-input"></el-input>
+                <el-input v-model="form.account" :disabled="disabled" class="acconut-input"></el-input>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input v-model="form.password" class="acconut-input"></el-input>
@@ -37,19 +45,56 @@
 
 <script>
     import VueCoreImageUpload  from 'vue-core-image-upload';
+    import Router from 'vue-router';
     export default {
-        props:[
-            'form',
-            'src',
-            'aaa'
-        ],
+        data: function(){
+            return {
+                form: {
+                    account:'',
+                    password: '',
+                    realName: '',
+                    isActive: false,
+                    sex: '',      
+                },
+                src:'../../../static/img/img.jpg',
+                type:'',
+                disabled:false
+            }
+        },
+
         components: {
             VueCoreImageUpload,
         },
+        created: function(){
+            this.fetchData()
+        },
+        watch: {
+            '$route': 'fetchData'
+        },
         methods:{
+            
+            imageUploaded(res) {
+                console.log(res)
+            },
+            handleError(){
+                this.$notify.error({
+                    title: '上传失败',
+                    message: '图片上传接口上传失败，可更改为自己的服务器接口'
+                });
+            },
             onSubmit() {
                 this.$message.success('提交成功！');
                 this.$emit("onSubmit","123123");
+            },
+
+            fetchData () {
+                var tempType = this.$route.query.type;
+                if(tempType === 'add'){
+                    this.$set(this,"disabled",false);
+                }else{
+                    this.$set(this,"disabled",true);
+                }
+                this.$set(this,"type",tempType);
             }
         }
     }
@@ -70,4 +115,3 @@
         bottom:60px;
     }
 </style>
-

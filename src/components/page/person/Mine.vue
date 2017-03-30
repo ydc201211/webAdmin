@@ -1,5 +1,12 @@
 <template>
     <div>
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item><i class="el-icon-date"></i>人员信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item >个人资料</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <!--人员信息表单-->
         <img class="pre-img" :src="src" alt="">
         <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop','upload-img']"
                             :crop="true"
@@ -10,7 +17,7 @@
                             @:errorhandle="handleError"></vue-core-image-upload>
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="账户">
-                <el-input v-model="form.account" class="acconut-input"></el-input>
+                <el-input v-model="form.account" :disabled="disabled" class="acconut-input"></el-input>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input v-model="form.password" class="acconut-input"></el-input>
@@ -32,42 +39,32 @@
                 <el-button>取消</el-button>
             </el-form-item>
         </el-form>
+    
     </div>
 </template>
 
 <script>
-    import VueCoreImageUpload  from 'vue-core-image-upload';
     export default {
-        props:[
-            'form',
-            'src',
-            'aaa'
-        ],
-        components: {
-            VueCoreImageUpload,
+        data: function(){
+            return {
+                form: {
+                    account:"ydc2012",
+                    password: '123',
+                    realName: '张三',
+                    isActive: false,
+                    sex: '男',      
+                },
+                src:'../../../static/img/img.jpg',
+                disabled:'true'
+            }
         },
-        methods:{
-            onSubmit() {
-                this.$message.success('提交成功！');
-                this.$emit("onSubmit","123123");
+        components: {
+        },
+        methods: {
+            change: function(msg){
+                console.log(msg);
             }
         }
     }
 </script>
-
-<style>
-    .acconut-input{
-        width: 300px;
-    }
-    .pre-img{
-        width:150px;
-        height: 150px;
-        margin:0 0 20px 80px;
-    }
-    .upload-img{
-        top:-10px;
-        left:80px;
-        bottom:60px;
-    }
-</style>
 

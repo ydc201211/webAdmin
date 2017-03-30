@@ -3,13 +3,11 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><i class="el-icon-menu"></i>人员信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item v-if="type === 'table'">巡检员信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item v-else-if="type === 'add'">添加信息</el-breadcrumb-item>
-                <el-breadcrumb-item v-else-if="type === 'modify'">编辑信息</el-breadcrumb-item>
+                <el-breadcrumb-item >巡检员信息管理</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <!--信息表格-->
-        <div v-if="type === 'table'">
+        <div>
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column type="selection" width="70">
                 </el-table-column>
@@ -40,27 +38,11 @@
                 </el-pagination>
             </div>
         </div>
-        <!--添加信息-->
-        <div v-if="type === 'add'">
-             <info 
-                @onSubmit='change'
-                :form='form'
-                :src='src'>
-            </info>
-        </div>
-        <div v-if="type === 'modify'">
-             <info 
-                @onSubmit='change'
-                :form='form'
-                :src='src'>
-            </info>
-        </div>
     </div>
 </template>
 
 <script>
     import mine from './Mine.vue';
-    import info from './InfoForm.vue';
     export default {
         
         data() {
@@ -90,19 +72,9 @@
                     realName: '张三',
                     sex: '男'
                 }],
-                type:"table",
-                form: {
-                    account:"ydc2012",
-                    password: '123',
-                    realName: '张三',
-                    isActive: false,
-                    sex: '男',      
-                }
             }
         },
-
         components:{
-            info
         },
         methods: {
             formatter(row, column) {
@@ -112,38 +84,42 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                this.$message('编辑第'+(index+1)+'行');
+                this.$router.push({ 
+                    path: '/manage', 
+                    query: { 
+                        type:'modify', 
+                        id:row.id
+                    }
+                });
             },
             handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
-            },
-            goAddPerson(){
-                this.$router.push({ path: '/components/page/AddPerson'});
+                this.$confirm('此操作将永久删除该信息, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                    }).then(() => {
+                        
+
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        this.tableData.splice(index,1);
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });          
+                });
+                // this.$message.error('删除第'+(index+1)+'行');
             },
             changeAddStatus(){
-                this.$set(this,'form',{
-                    account: '',
-                    password: '',
-                    realName: '',
-                    isActive: '',
-                    sex: '',      
+                 this.$router.push({ 
+                    path: '/manage', 
+                    query: { 
+                        type:'add'
+                    }
                 });
-                this.$set(this,'type',"add");
-            },
-            change(){
-                switch (this.type) {
-                    case "table":
-                        console.log("table");       
-                        break;
-                    case "add":
-                        console.log("add");
-                        break;
-                    case "modify":
-                        console.log("modify");
-                        break;
-                    default:
-                        break;
-                }
             }
         }
     }

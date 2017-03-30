@@ -51,11 +51,38 @@ export default new Router({
                 },
                 {
                     path: '/inspectorInfo',
-                    component: resolve => require(['../components/page/InspectorInfo.vue'], resolve)    // 巡检员信息页面
+                    component: resolve => require(['../components/page/person/InspectorInfo.vue'], resolve)    // 巡检员信息页面
                 },
                 {
                     path: '/mine',
-                    component: resolve => require(['../components/page/Mine.vue'], resolve) //个人资料页面
+                    component: resolve => require(['../components/page/person/Mine.vue'], resolve) //个人资料页面
+                },
+                {
+                    path: '/pretaskinfo',
+                    component: resolve => require(['../components/page/task/PreTaskInfo.vue'], resolve) //任务信息页面
+                }
+            ]
+        },
+
+        {
+            name: 'manage',
+            path: '/manage',
+            component: resolve => require(['../components/common/Home.vue'], resolve),
+            children:[
+                {
+                    path: '/',
+                    component: resolve => require(['../components/page/person/ManageForm.vue'], resolve)
+                },
+            ]
+        },
+
+        {
+            path: '/manageTask',
+            component: resolve => require(['../components/common/Home.vue'], resolve),
+            children:[
+                {
+                    path: '/',
+                    component: resolve => require(['../components/page/task/TaskForm.vue'], resolve)
                 },
             ]
         },
