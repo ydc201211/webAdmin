@@ -6,8 +6,8 @@
             </el-menu-item>
             <el-submenu index="2">
                 <template slot="title"><i class="el-icon-menu"></i>巡检任务管理</template>
-                <el-menu-item index="pretaskinfo">待巡检任务</el-menu-item>
-                <el-menu-item index="taskinfo">已巡检任务</el-menu-item>
+                <el-menu-item index="preTaskinfo">待巡检任务</el-menu-item>
+                <el-menu-item index="finishTaskinfo">已巡检任务</el-menu-item>
                 <el-menu-item index="basetable">基础表格</el-menu-item>
                 <el-menu-item index="vuetable">Vue表格组件</el-menu-item>
             </el-submenu>

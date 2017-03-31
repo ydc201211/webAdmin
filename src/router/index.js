@@ -58,8 +58,12 @@ export default new Router({
                     component: resolve => require(['../components/page/person/Mine.vue'], resolve) //个人资料页面
                 },
                 {
-                    path: '/pretaskinfo',
-                    component: resolve => require(['../components/page/task/PreTaskInfo.vue'], resolve) //任务信息页面
+                    path: '/preTaskinfo',
+                    component: resolve => require(['../components/page/task/PreTaskInfo.vue'], resolve) //待完成任务信息页面
+                },
+                {
+                    path: '/finishTaskinfo',
+                    component: resolve => require(['../components/page/task/FinishTaskInfo.vue'], resolve) //已完成任务信息页面
                 }
             ]
         },
@@ -77,15 +81,26 @@ export default new Router({
         },
 
         {
-            path: '/manageTask',
+            path: '/handleTask',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             children:[
                 {
                     path: '/',
                     component: resolve => require(['../components/page/task/TaskForm.vue'], resolve)
-                },
+                }
             ]
         },
+        {
+            path: '/taskDetail',
+            component: resolve => require(['../components/common/Home.vue'], resolve),
+            children:[
+                {
+                    path: '/',
+                    component: resolve => require(['../components/page/task/TaskDetail.vue'], resolve)
+                }
+            ]
+        },
+
         {
             path: '/login',
             component: resolve => require(['../components/page/Login.vue'], resolve)

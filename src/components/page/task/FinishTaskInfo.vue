@@ -19,7 +19,7 @@
                 </el-table-column>
                 <el-table-column prop="taskName" label="任务名" sortable width="180">
                 </el-table-column>
-                <el-table-column prop="deadLine" label="任务截止时间" sortable width="180">
+                <el-table-column prop="overTime" label="任务完成时间" sortable width="180">
                 </el-table-column>
                 <el-table-column prop="inspectorName" label="巡检员" :formatter="formatter" width="150">
                 </el-table-column>
@@ -32,15 +32,12 @@
                 </el-table-column>
                 <el-table-column label="操作" width="235">
                     <template scope="scope">
-                        <el-button size="small"
-                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                         <el-button size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
 
-            <el-button size="small" type="info" class="add-btn" @click='handleAdd()'>添加</el-button>
             <div class="pagination">
                 <el-pagination
                         layout="prev, pager, next"
@@ -59,30 +56,30 @@
                 tableData: [{
                     id:"17001",
                     taskName: 'ydc201211',
-                    deadLine: '123456',
+                    overTime: '2017.3.14',
                     inspectorName: '张三',
-                    priority: '女'
+                    priority: '1'
                 }, 
                 {
                     id:"17002",
                     taskName: 'ydc201211',
-                    deadLine: '123456',
+                    overTime: '2016.11.11',
                     inspectorName: '张三',
-                    priority: '女'
+                    priority: '1'
                 }, 
                 {
                     id:"17003",
                     taskName: 'ydc201211',
-                    deadLine: '123456',
+                    overTime: '2016.11.11',
                     inspectorName: '张三',
-                    priority: '女'
+                    priority: '1'
                 }, 
                 {
                     id:"17004",
                     taskName: 'ydc201211',
-                    deadLine: '123456',
+                    overTime: '2016.11.11',
                     inspectorName: '张三',
-                    priority: '女'
+                    priority: '1'
                 }],
 
                 isCustomDelete:0
@@ -103,15 +100,6 @@
                     path: '/taskDetail', 
                     query: { 
                         type:'detail', 
-                        id:row.id
-                    }
-                });
-            },
-            handleEdit(index, row) {
-                this.$router.push({ 
-                    path: '/handleTask',
-                    query: { 
-                        type:'modify', 
                         id:row.id
                     }
                 });
@@ -139,22 +127,20 @@
             },
             handleAdd(){
                  this.$router.push({ 
-                    path: '/handleTask',
+                    path: '/manageTask',
                     query: { 
                         type:'add'
                     }
                 });
             },
+
             handleSelectionChange(val) {
-               
                 if(val.length != 0){
                     this.isCustomDelete = 1;
                     this.multipleSelection = val;
                 }else{
                     this.isCustomDelete = 0;
                 }
-                
-               
             },
             customDelete(){
                 this.$confirm('此操作将永久删除该信息, 是否继续?', '提示', {

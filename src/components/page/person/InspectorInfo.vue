@@ -6,9 +6,13 @@
                 <el-breadcrumb-item >巡检员信息管理</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
+        <!--批量删除-->
+        <div class="custom-delete">
+             <el-button v-if="isCustomDelete === 1" size="small" type="danger" @click="customDelete">批量删除</el-button>
+        </div>
         <!--信息表格-->
         <div>
-            <el-table :data="tableData" border style="width: 100%">
+            <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="70">
                 </el-table-column>
                 <el-table-column prop="id" label="ID" sortable width="120">
@@ -42,11 +46,11 @@
 </template>
 
 <script>
-    import mine from './Mine.vue';
     export default {
-        
         data() {
             return {
+                
+                multipleSelection: [],
                 tableData: [{
                     id:"17001",
                     account: 'ydc201211',
@@ -72,6 +76,7 @@
                     realName: '张三',
                     sex: '男'
                 }],
+                isCustomDelete:0
             }
         },
         components:{
@@ -120,6 +125,40 @@
                         type:'add'
                     }
                 });
+            },
+            handleSelectionChange(val) {
+                 if(val.length != 0){
+                    this.isCustomDelete = 1;
+                    this.multipleSelection = val;
+                }else{
+                    this.isCustomDelete = 0;
+                }
+               
+               
+            },
+            customDelete(){
+                this.$confirm('此操作将永久删除该信息, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                    }).then(() => {
+                        for(var i in this.multipleSelection){
+                            for(var j in this.tableData){
+                                if(this.multipleSelection[i].id === this.tableData[j].id){
+                                    this.tableData.splice(j,1);
+                                }
+                            }
+                        }
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                    });          
+                });
             }
         }
     }
@@ -128,5 +167,9 @@
     .add-btn{
         float: left;
         margin: 10px 0 0 0;
+    }
+    .custom-delete{
+        margin-bottom: 10px;
+        height: 30px;
     }
 </style>
