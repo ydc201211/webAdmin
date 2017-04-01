@@ -11,42 +11,40 @@
              <el-button v-if="isCustomDelete === 1" size="small" type="danger" @click="customDelete">批量删除</el-button>
         </div>
         <!--信息表格-->
-        <div>
-            <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="70">
-                </el-table-column>
-                <el-table-column prop="id" label="ID" sortable width="120">
-                </el-table-column>
-                <el-table-column prop="taskName" label="任务名" sortable width="180">
-                </el-table-column>
-                <el-table-column prop="deadLine" label="任务截止时间" sortable width="180">
-                </el-table-column>
-                <el-table-column prop="inspectorName" label="巡检员" :formatter="formatter" width="150">
-                </el-table-column>
-                <el-table-column prop="priority" label="优先级" width="100">
-                </el-table-column>
-                <el-table-column label="详情" width="100">
-                    <template scope="scope">
-                        <div class="detail-cell" @click="showDetail(scope.$index, scope.row)">详细</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作" width="235">
-                    <template scope="scope">
-                        <el-button size="small"
-                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
+        <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="70">
+            </el-table-column>
+            <el-table-column prop="id" label="ID" sortable width="120">
+            </el-table-column>
+            <el-table-column prop="taskName" label="任务名" sortable width="180">
+            </el-table-column>
+            <el-table-column prop="deadLine" label="任务截止时间" sortable width="180">
+            </el-table-column>
+            <el-table-column prop="inspectorName" label="巡检员" :formatter="formatter" width="150">
+            </el-table-column>
+            <el-table-column prop="priority" label="优先级" width="100">
+            </el-table-column>
+            <el-table-column label="详情" width="100">
+                <template scope="scope">
+                    <div class="detail-cell" @click="showDetail(scope.$index, scope.row)">详细</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="235">
+                <template scope="scope">
+                    <el-button size="small"
+                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="small" type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
 
-            <el-button size="small" type="info" class="add-btn" @click='handleAdd()'>添加</el-button>
-            <div class="pagination">
-                <el-pagination
-                        layout="prev, pager, next"
-                        :total="1000">
-                </el-pagination>
-            </div>
+        <el-button size="small" type="info" class="add-btn" @click='handleAdd()'>添加</el-button>
+        <div class="pagination">
+            <el-pagination
+                    layout="prev, pager, next"
+                    :total="1000">
+            </el-pagination>
         </div>
     </div>
 </template>

@@ -7,7 +7,7 @@
             </el-breadcrumb>
         </div>
         <!--人员信息表单-->
-        <img class="pre-img" :src="src" alt="">
+        <img class="pre-mine-img" :src="src" alt="">
         <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop','upload-img']"
                             :crop="true"
                             text="上传图片"
@@ -25,9 +25,6 @@
             <el-form-item label="真实名字">
                 <el-input v-model="form.realName" class="acconut-input"></el-input>
             </el-form-item>
-            <el-form-item label="禁用账户">
-                <el-switch on-text="是" off-text="否" v-model="form.isActive"></el-switch>
-            </el-form-item>
             <el-form-item label="性别">
                 <el-radio-group v-model="form.sex">
                     <el-radio label="男"></el-radio>
@@ -44,6 +41,7 @@
 </template>
 
 <script>
+    import VueCoreImageUpload  from 'vue-core-image-upload';
     export default {
         data: function(){
             return {
@@ -51,7 +49,6 @@
                     account:"ydc2012",
                     password: '123',
                     realName: '张三',
-                    isActive: false,
                     sex: '男',      
                 },
                 src:'../../../static/img/img.jpg',
@@ -59,6 +56,7 @@
             }
         },
         components: {
+            VueCoreImageUpload
         },
         methods: {
             change: function(msg){
@@ -67,4 +65,21 @@
         }
     }
 </script>
+<style>
+.pre-mine-img{
+    width:130px;
+    height: 130px;
+    margin:0 0 20px 80px;
+}
+.upload-img{
+    width: 130px;
+    top:-10px;
+    left:80px;
+    bottom:60px;
+    cursor: pointer;
+}
+ .acconut-input{
+    width: 300px;
+}
+</style>
 

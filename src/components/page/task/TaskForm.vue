@@ -16,7 +16,13 @@
                 <el-input v-model="form.taskName" class="acconut-input"></el-input>
             </el-form-item>
             <el-form-item label="任务截止时间" >
-                <el-input v-model="form.deadLine" class="acconut-input"></el-input>
+                 <div class="block">
+                    <el-date-picker
+                        v-model="form.deadLine"
+                        type="datetime">
+                    </el-date-picker>
+                </div>
+                <!--<el-input v-model="form.deadLine" class="acconut-input"></el-input>-->
             </el-form-item>
             <el-form-item label="巡检员" >
                 <el-dropdown trigger="click">
@@ -46,28 +52,9 @@
                     type="textarea"
                     :rows="4"
                     placeholder="空"
-                    v-model="textarea">
+                    v-model="form.taskDes">
                 </el-input>
             </el-form-item>
-            <el-form-item label="道路问题描述" >
-                <el-input
-                    class="taskDec"
-                    type="textarea"
-                    :rows="4"
-                    placeholder="空"
-                    v-model="textarea">
-                </el-input>
-            </el-form-item>
-            <el-form-item label="道路问题图片(可展示)" >
-                <img v-lazy="imageUrl" class="pre-img" alt="">
-                <img v-lazy="imgObject" class="pre-img" alt="">
-                <img v-lazy="imgObject" class="pre-img" alt="">
-            </el-form-item>
-            <el-form-item label="道路问题视频" >
-                <div class="road-video">
-
-                </div>
-            </el-form-item>           
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
                 <el-button>取消</el-button>
@@ -85,9 +72,10 @@
                 form:{
                     id:"17001",
                     taskName: 'ydc201211',
-                    deadLine: '123456',
+                    deadLine: '2017-04-01 15:37:36',
                     inspectorName: '张三',
-                    priority: '1'
+                    priority: '1',
+                    taskDes:"我阿阿斯顿全文请为群殴为怄气我饿"
                 },
 
                 inspectorOptions:[
@@ -100,26 +88,14 @@
                         inspectorName:"李四"
                     },
                 ],
-                imgObject:[
-                    {
-                        src: '/static/img/default.png',
-                        error: '/static/img/default.png',
-                        loading: '/static/img/default.png'
-                    },
-                    {
-                        src: '/static/img/default.png',
-                        error: '/static/img/default.png',
-                        loading: '/static/img/default.png'
-                    }
-                ],
                 imageUrls: [
                     {
                         imageUrlId:1,
-                        imageUrl:"/static/img/default.png"
+                        imageUrl:"/static/img/default1.png"
                     },
                     {
                         imageUrlId:2,
-                        imageUrl:"/static/img/default.png"
+                        imageUrl:"/static/img/default1.png"
                     }
                     
                 ],
@@ -159,16 +135,32 @@
                 this.$emit("onSubmit","123123");
             },
 
-             fetchData () {
-                 
+            fetchData () {  
                 var tempType = this.$route.query.type;
+
                 console.log(tempType);
-                if(tempType === 'add'){
-                    this.$set(this,"disabled",false);
+                if(tempType === 'modify'){
+                    this.$set(this,"type","modify");
                 }else{
-                    this.$set(this,"disabled",true);
+                    this.$set(this,"type","add");
+                    this.$set(this,"form.id","");
+                    this.$set(this,"form.taskName","");
+                    this.$set(this,"form.deadLine","");
+                    this.$set(this,"form.inspectorName","");
+                    this.$set(this,"form.priority","");
                 }
                 this.$set(this,"type",tempType);
+            }
+        },
+        filters:{
+            filterPriority(value){
+                if(value === "1"){
+                    return "紧急";
+                }else if(value === "2"){
+                    return "重要";
+                }else{
+                    return "一般";
+                }
             }
         }
     }
